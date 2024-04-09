@@ -10,7 +10,8 @@ Django, Html, CSS
 
 
 ## 3. 레포 및 배포
-repo : https://github.com/helloghostt/booking-system<br>
+Backend-Repo  : https://github.com/helloghostt/be-booking-system<br>
+Frontend-Repo  : https://github.com/helloghostt/fe-booking-system<br>
 url : 
 
     superuser
