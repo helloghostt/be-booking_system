@@ -11,15 +11,14 @@
 Django, Html, CSS
 
 ## 3. github repo, url 생성
-Backend repo :  https://github.com/helloghostt/be-booking_system
-Frontend repo :  https://github.com/helloghostt/fe-booking_system
-url : 
+Backend repo :  https://github.com/helloghostt/be-booking_system <br>
+Frontend repo :  https://github.com/helloghostt/fe-booking_system <br>
+url : <br>
 
-superuser
-
-admin-park
-helloghostt1@gmail.com
-park1234!
+superuser <br>
+    admin-park
+    helloghostt1@gmail.com
+    park1234!
 
 ## 4. WBS 작성 - 업무 분류 체계
 
