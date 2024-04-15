@@ -11,14 +11,15 @@
 Django, Html, CSS
 
 ## 3. github repo, url 생성
-Backend repo :  https://github.com/helloghostt/be-booking_system <br>
-Frontend repo :  https://github.com/helloghostt/fe-booking_system <br>
-url : <br>
+Backend repo :  https://github.com/helloghostt/be-booking_system
+Frontend repo :  https://github.com/helloghostt/fe-booking_system
+url : 
 
-superuser <br>
-    admin-park
-    helloghostt1@gmail.com
-    park1234!
+superuser
+
+admin-park
+helloghostt1@gmail.com
+park1234!
 
 ## 4. WBS 작성 - 업무 분류 체계
 
@@ -46,9 +47,9 @@ CRUD 구현 :2024-04-05, 5d
 버그 수정 :2024-04-10, 6d
 
 section 배포
-테스트 :2024-04-15, 2d
+테스트 및 배포 :2024-04-15, 2d
 문서 수정 :2024-04-16, 2d
-배포 및 프로젝트 완료 :2024-04-17, 1d
+발표 및 프로젝트 완료 :2024-04-17, 1d
 ```
 
 
@@ -65,13 +66,12 @@ section 배포
 
 
 ## 7. 폴더구조
-    be/
+   backend/
     ├── tennisproject/
     │   ├── __init__.py
     │   ├── asgi.py
     │   ├── settings.py
     │   ├── urls.py
-    │   ├── views.py
     │   └── wsgi.py
     ├── accounts/
     │   ├── migrations/
@@ -79,6 +79,8 @@ section 배포
     │   ├── admin.py
     │   ├── apps.py
     │   ├── models.py
+    │   ├── serializers.py
+    │   ├── tests.py
     │   ├── urls.py
     │   └── views.py
     ├── courts/
@@ -87,6 +89,8 @@ section 배포
     │   ├── admin.py
     │   ├── apps.py
     │   ├── models.py
+    │   ├── serializers.py
+    │   ├── tests.py
     │   ├── urls.py
     │   └── views.py
     ├── bookings/
@@ -95,6 +99,8 @@ section 배포
     │   ├── admin.py
     │   ├── apps.py
     │   ├── models.py
+    │   ├── serializers.py
+    │   ├── tests.py
     │   ├── urls.py
     │   └── views.py
     ├── notices/
@@ -103,23 +109,23 @@ section 배포
     │   ├── admin.py
     │   ├── apps.py
     │   ├── models.py
+    │   ├── serializers.py
+    │   ├── tests.py
     │   ├── urls.py
     │   └── views.py
-    ├── templates/
-    │   ├── base.html
-    │   ├── accounts/
-    │   ├── bookings/
-    │   ├── notices/
-    │   ├── index.html
-    │   └── intro.html
-    ├── media/
-    ├── static/
-    │   ├── css/
-    │   ├── js/
-    │   └── images/
+    ├── blog/
+    │   ├── migrations/
+    │   ├── __init__.py
+    │   ├── admin.py
+    │   ├── apps.py
+    │   ├── models.py
+    │   ├── serializers.py
+    │   ├── tests.py
+    │   ├── urls.py
+    │   └── views.py
     └── manage.py
-    
-    fe/
+  
+    Frontend/
     ├── src/
     │   ├── components/
     │   │   ├── accounts/ 계정 관련 컴포넌트 (로그인 폼, 회원가입 폼, 프로필)
@@ -138,6 +144,10 @@ section 배포
     │   │   │   ├── Header.js
     │   │   │   ├── Footer.js
     │   │   │   └── Navigation.js
+    │   │   ├── blog/
+    │   │   │   ├── BlogList.js
+    │   │   │   ├── BlogForm.js
+    │   │   │   └── BlogDetail.js
     │   │   └── intro/ 소개 페이지 컴포넌트
     │   │       └── Intro.js
     │   ├── pages/ 각 페이지를 나타내는 컴포넌트 폴더
@@ -145,11 +155,13 @@ section 배포
     │   │   ├── Login.js
     │   │   ├── Signup.js
     │   │   ├── Booking.js
+    │   │   ├── Blog.js
     │   │   ├── Notice.js
     │   │   └── Intro.js
     │   ├── api/
     │   │   ├── auth.js  인증 관련 API 호출 함수
     │   │   ├── bookings.js  예약 관련 API 호출 함수
+    │   │   ├── blog.js
     │   │   └── notices.js  공지사항 관련 API 호출 함수
     │   ├── styles/
     │   │   ├── global.css
@@ -160,55 +172,88 @@ section 배포
     │   ├── index.html
     │   └── favicon.ico
     └── package.json 
-  
+
 
 ## 8. URL 구조 및 페이지별 상세
 |URL|페이지 설명|GET|POST|PUT|DELETE|로그인 권한|작성자 권한|
 |------|---|:---:|:---:|:---:|:---:|:---:|:---:|
 |/|메인 페이지|✔️| | | | | |
-|/admin/|관리자 페이지|✔️| | | |✔️|✔️|
-|/accounts/login|로그인| |✔️| | | | |
-|/accounts/logout|로그아웃| |✔️| | |✔️| |
-|/accounts/signup|회원가입| |✔️| | | | |
-|/accounts/profile|프로필 조회<br>예약 상세<br>비밀번호 변경|✔️<br>✔️<br>✔️|<br><br>✔️| | |✔️<br>✔️<br>✔️|<br><br>✔️|
-|/intro/|소개 페이지|✔️| | | | | |
-|/bookings/courts|코트 선택|✔️| | | |✔️| |
-|/bookings/create|예약 생성|✔️|✔️| | |✔️| |
-|/notices|공지사항 목록<br>공지사항 생성|✔️<br><br>|<br>✔️| | |<br>✔️|<br>✔️|
-|/notices/{noticeId}|공지사항 상세<br>공지사항 수정<br>공지사항 삭제|✔️<br><br><br>| |✔️|<br><br>✔️|<br>✔️<br>✔️|<br>✔️<br>✔️|
+|/admin|Django 관리자 페이지|✔️| | | |관리자|관리자|
+|/accounts/login|로그인 페이지|✔️|✔️| | | | |
+|/accounts/signup|회원가입 페이지|✔️|✔️| | | | |
+|/accounts/profile|프로필 페이지|✔️| |✔️| |회원|회원 본인|
+|/intro|클럽 소개 페이지|✔️| | | | | |
+|/courts/|예약하기 페이지 (코트 선택)|✔️| | | |회원| |
+|/bookings/create|예약 페이지|✔️|✔️| | |회원|회원 본인|
+|/notices|커뮤니티 페이지 (공지사항 목록)|✔️| | | | | |
+|/notices/:id|공지사항 상세 페이지|✔️| | | | | |
+|/notices/create|공지사항 작성 페이지|✔️|✔️| | |관리자|관리자|
+|/notices/:id/edit|공지사항 수정 페이지|✔️| |✔️| |관리자|관리자|
+|/notices/:id/delete|공지사항 삭제| | | |✔️|관리자|관리자|
+|/blog|자유게시판 페이지 (게시글 목록)|✔️| | | | | |
+|/blog/:id|게시글 상세 페이지|✔️| | | | | |
+|/blog/create|게시글 작성 페이지|✔️|✔️| | |회원|회원 본인|
+|/blog/:id/edit|게시글 수정 페이지|✔️| |✔️| |회원|게시글 작성자|
+|/blog/:id/delete|게시글 삭제| | | |✔️|회원|게시글 작성자|
+|/blog/:id/comments|댓글 목록|✔️|✔️| | | | |
+|/blog/:id/comments/:commentId|댓글 상세|✔️| |✔️|✔️|회원|댓글 작성자|
 
-    1. 메인 페이지 구현
+   1. 메인 페이지 구현
         - url : `/`
-        - 클럽 소개, 공지사항, 코트, 입장하기 버튼
+        - React에서 메인 페이지 컴포넌트를 생성하고, 클럽 소개, 커뮤니티, 예약하기, 입장하기 버튼을 배치
+	    - 버튼 클릭 시 해당 페이지로 이동하는 라우팅을 설정합니다.
     2. Django admin
         - url : `/admin`
         - 코트별 시간대 설정, 회원 관리
-    3. 회원가입 페이지
-        - url : `/accounts/signup`
-        - 입력값은 id, password
-    4. 로그인 페이지
+    3. 로그인 페이지
         - url : `/accounts/login`
-        - 입력값은 id, password
+        - 입력값은 id, password 
+	    - 메인페이지에서 입장하기를 누르면 로그인페이지로 이동
+	    - React에서 로그인 폼을 생성하고, 사용자로부터 아이디와 비밀번호를 입력받습니다.
+	    - 중복 아이디 검증, 이메일 및 아이디 형식 검증을 수행합니다.
+	    - Django에서 사용자 인증을 처리하는 API를 구현하고, 로그인 성공 시 토큰을 발급합니다.
+	    - 로그인 성공 후 메인 페이지로 리디렉션하고, 입장하기 버튼을 프로필 버튼으로 변경합니다.
+    4. 회원가입 페이지
+        - url : `/accounts/signup`
+        - 입력값은 id, password, confirm password
+	    - 회원가입 성공하면 로그인 페이지로 리디렉션
     5. 프로필 페이지
         - url : `/accounts/profile`
-        - password 변경 기능, 예약 확인 기능
+	    - React에서 프로필 페이지 컴포넌트를 생성하고, 사용자 정보를 표시합니다.
+        - password 변경 기능, booking list 확인 기능, 로그아웃 기능
     6. 클럽 소개 페이지
         - url: `/intro`
-        - 클럽에 대한 간단한 소개와 주소 
-        - 연락처에는 이메일 보내기 기능
-    7. 예약 페이지
-        - url : `/bookings/create`
-        - 날짜 선택하고 시간에 따른 클래스 선택
-    8. 공지사항 게시판
+        - 클럽에 대한 간단한 소개가 있고 아래에 위치와 연락처 표시
+	    - 위치에 Google Map API 연동
+        - 연락처에는 이메일 보내기 기능(title, context, email을 쓰는 form이 있고 send버튼을 누르면 저장된 회사이메일로 발송)
+    7. 예약하기 페이지
+        - url : `/courts/`
+	    - React에서 코트 선택 페이지 컴포넌트를 생성하고, 사용 가능한 코트 목록을 표시
+	    - 코트 선택 시 예약 페이지로 이동하는 라우팅을 설정
+    8. 예약 페이지
+	    - url : `/bookings/create`
+        - 날짜 선택하고 시간에 따른 클래스 선택하여 예약
+	    - 예약 버튼 클릭 시 Django 서버로 예약 정보를 전송하고, 예약 성공 팝업을 표시
+	    - 예약 성공 시 사용자의 프로필 페이지에 예약 내역을 추가
+    9. 커뮤니티 페이지
         - url : `/notices`
+        - 공지사항, 자유게시판 선택 버튼
         - 관리자만 이벤트 등의 글을 작성, 수정, 삭제
         - 회원은 글을 읽기만 가능
+    10.  자유게시판 페이지
+        - url : `/blog`
+        - 로그인 한 회원은 자신의 글만 작성, 수정, 삭제
+    	- 게시글 작성: 제목, 내용, 이미지(미디어)입력받고 작성자, 업데이트시간 표시
+	    - 게시글과 댓글에 대한 CRUD기능 구현
 
 
 
 ## 9. 생각
-* 
+* 간단한 기능 구현이지만 백엔드 프론트엔드를 나눠서 구조화하는 것이 아직 어려웠고 TDD등 여러가지를 생각하다보니 꼬임
+* 배포에 대한 공부가 많이 필요
 
 
 ## 10. 트러블슈팅
+* onedrive폴더에서 압축하다가 취소 -> 삭제됨
+* 백엔드 프론트엔드 연결
 
