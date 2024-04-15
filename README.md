@@ -7,19 +7,21 @@
 테니스 클럽을 중점에 두고 만들었으나 요가 스튜디오나 회의실 예약 등으로 변경 가능합니다.  
 
 
-## 2. 기술 스택 및 개발 환경
-Django, Html, CSS
+## 2. 기술 스택 및 배포 환경
+backend, frontend : Django, Html, CSS, JavaScript, React
+cloud service : AWS Lightsail, GitHub
+
 
 ## 3. github repo, url 생성
-Backend repo :  https://github.com/helloghostt/be-booking_system
-Frontend repo :  https://github.com/helloghostt/fe-booking_system
+Backend repo :  https://github.com/helloghostt/be-booking_system <br>
+Frontend repo :  https://github.com/helloghostt/fe-booking_system <br>
 url : 
 
-superuser
-
-admin-park
-helloghostt1@gmail.com
-park1234!
+	superuser
+	
+	admin-park
+	helloghostt1@gmail.com
+	park1234!
 
 ## 4. WBS 작성 - 업무 분류 체계
 
@@ -66,64 +68,64 @@ section 배포
 
 
 ## 7. 폴더구조
-   backend/
-    ├── tennisproject/
-    │   ├── __init__.py
-    │   ├── asgi.py
-    │   ├── settings.py
-    │   ├── urls.py
-    │   └── wsgi.py
-    ├── accounts/
-    │   ├── migrations/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── serializers.py
-    │   ├── tests.py
-    │   ├── urls.py
-    │   └── views.py
-    ├── courts/
-    │   ├── migrations/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── serializers.py
-    │   ├── tests.py
-    │   ├── urls.py
-    │   └── views.py
-    ├── bookings/
-    │   ├── migrations/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── serializers.py
-    │   ├── tests.py
-    │   ├── urls.py
-    │   └── views.py
-    ├── notices/
-    │   ├── migrations/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── serializers.py
-    │   ├── tests.py
-    │   ├── urls.py
-    │   └── views.py
-    ├── blog/
-    │   ├── migrations/
-    │   ├── __init__.py
-    │   ├── admin.py
-    │   ├── apps.py
-    │   ├── models.py
-    │   ├── serializers.py
-    │   ├── tests.py
-    │   ├── urls.py
-    │   └── views.py
-    └── manage.py
+	   backend/
+	    ├── tennisproject/
+	    │   ├── __init__.py
+	    │   ├── asgi.py
+	    │   ├── settings.py
+	    │   ├── urls.py
+	    │   └── wsgi.py
+	    ├── accounts/
+	    │   ├── migrations/
+	    │   ├── __init__.py
+	    │   ├── admin.py
+	    │   ├── apps.py
+	    │   ├── models.py
+	    │   ├── serializers.py
+	    │   ├── tests.py
+	    │   ├── urls.py
+	    │   └── views.py
+	    ├── courts/
+	    │   ├── migrations/
+	    │   ├── __init__.py
+	    │   ├── admin.py
+	    │   ├── apps.py
+	    │   ├── models.py
+	    │   ├── serializers.py
+	    │   ├── tests.py
+	    │   ├── urls.py
+	    │   └── views.py
+	    ├── bookings/
+	    │   ├── migrations/
+	    │   ├── __init__.py
+	    │   ├── admin.py
+	    │   ├── apps.py
+	    │   ├── models.py
+	    │   ├── serializers.py
+	    │   ├── tests.py
+	    │   ├── urls.py
+	    │   └── views.py
+	    ├── notices/
+	    │   ├── migrations/
+	    │   ├── __init__.py
+	    │   ├── admin.py
+	    │   ├── apps.py
+	    │   ├── models.py
+	    │   ├── serializers.py
+	    │   ├── tests.py
+	    │   ├── urls.py
+	    │   └── views.py
+	    ├── blog/
+	    │   ├── migrations/
+	    │   ├── __init__.py
+	    │   ├── admin.py
+	    │   ├── apps.py
+	    │   ├── models.py
+	    │   ├── serializers.py
+	    │   ├── tests.py
+	    │   ├── urls.py
+	    │   └── views.py
+	    └── manage.py
   
     Frontend/
     ├── src/
@@ -198,62 +200,71 @@ section 배포
 |/blog/:id/comments|댓글 목록|✔️|✔️| | | | |
 |/blog/:id/comments/:commentId|댓글 상세|✔️| |✔️|✔️|회원|댓글 작성자|
 
-   1. 메인 페이지 구현
-        - url : `/`
-        - React에서 메인 페이지 컴포넌트를 생성하고, 클럽 소개, 커뮤니티, 예약하기, 입장하기 버튼을 배치
-	    - 버튼 클릭 시 해당 페이지로 이동하는 라우팅을 설정합니다.
-    2. Django admin
-        - url : `/admin`
-        - 코트별 시간대 설정, 회원 관리
-    3. 로그인 페이지
-        - url : `/accounts/login`
-        - 입력값은 id, password 
-	    - 메인페이지에서 입장하기를 누르면 로그인페이지로 이동
-	    - React에서 로그인 폼을 생성하고, 사용자로부터 아이디와 비밀번호를 입력받습니다.
-	    - 중복 아이디 검증, 이메일 및 아이디 형식 검증을 수행합니다.
-	    - Django에서 사용자 인증을 처리하는 API를 구현하고, 로그인 성공 시 토큰을 발급합니다.
-	    - 로그인 성공 후 메인 페이지로 리디렉션하고, 입장하기 버튼을 프로필 버튼으로 변경합니다.
-    4. 회원가입 페이지
-        - url : `/accounts/signup`
-        - 입력값은 id, password, confirm password
-	    - 회원가입 성공하면 로그인 페이지로 리디렉션
-    5. 프로필 페이지
+	1) 메인 페이지 구현
+	- url : `/`
+	- React에서 메인 페이지 컴포넌트를 생성하고, 클럽 소개, 커뮤니티, 예약하기, 입장하기 버튼을 배치
+	- 버튼 클릭 시 해당 페이지로 이동하는 라우팅을 설정합니다.
+	
+	2) Django admin
+	- url : `/admin`
+	- 코트별 시간대 설정, 회원 관리
+	
+	3) 로그인 페이지
+	- url : `/accounts/login`
+	- 입력값은 id, password 
+	- 메인페이지에서 입장하기를 누르면 로그인페이지로 이동
+	- React에서 로그인 폼을 생성하고, 사용자로부터 아이디와 비밀번호를 입력받습니다.
+	- 중복 아이디 검증, 이메일 및 아이디 형식 검증을 수행합니다.
+	- Django에서 사용자 인증을 처리하는 API를 구현하고, 로그인 성공 시 토큰을 발급합니다.
+	- 로그인 성공 후 메인 페이지로 리디렉션하고, 입장하기 버튼을 프로필 버튼으로 변경합니다.
+	
+	4) 회원가입 페이지
+	- url : `/accounts/signup`
+	- 입력값은 id, password, confirm password
+	- 회원가입 성공하면 로그인 페이지로 리디렉션
+	
+ 	5)프로필 페이지
         - url : `/accounts/profile`
-	    - React에서 프로필 페이지 컴포넌트를 생성하고, 사용자 정보를 표시합니다.
+	- React에서 프로필 페이지 컴포넌트를 생성하고, 사용자 정보를 표시합니다.
         - password 변경 기능, booking list 확인 기능, 로그아웃 기능
-    6. 클럽 소개 페이지
-        - url: `/intro`
-        - 클럽에 대한 간단한 소개가 있고 아래에 위치와 연락처 표시
-	    - 위치에 Google Map API 연동
-        - 연락처에는 이메일 보내기 기능(title, context, email을 쓰는 form이 있고 send버튼을 누르면 저장된 회사이메일로 발송)
-    7. 예약하기 페이지
-        - url : `/courts/`
-	    - React에서 코트 선택 페이지 컴포넌트를 생성하고, 사용 가능한 코트 목록을 표시
-	    - 코트 선택 시 예약 페이지로 이동하는 라우팅을 설정
-    8. 예약 페이지
-	    - url : `/bookings/create`
-        - 날짜 선택하고 시간에 따른 클래스 선택하여 예약
-	    - 예약 버튼 클릭 시 Django 서버로 예약 정보를 전송하고, 예약 성공 팝업을 표시
-	    - 예약 성공 시 사용자의 프로필 페이지에 예약 내역을 추가
-    9. 커뮤니티 페이지
-        - url : `/notices`
-        - 공지사항, 자유게시판 선택 버튼
-        - 관리자만 이벤트 등의 글을 작성, 수정, 삭제
-        - 회원은 글을 읽기만 가능
-    10.  자유게시판 페이지
-        - url : `/blog`
-        - 로그인 한 회원은 자신의 글만 작성, 수정, 삭제
-    	- 게시글 작성: 제목, 내용, 이미지(미디어)입력받고 작성자, 업데이트시간 표시
-	    - 게시글과 댓글에 대한 CRUD기능 구현
-
+    	
+	6) 클럽 소개 페이지
+	- url: `/intro`
+	- 클럽에 대한 간단한 소개가 있고 아래에 위치와 연락처 표시
+	- 위치에 Google Map API 연동
+	- 연락처에는 이메일 보내기 기능(title, context, email을 쓰는 form이 있고 send버튼을 누르면 저장된 회사이메일로 발송)
+	
+	7) 예약하기 페이지
+	- url : `/courts/`
+	- React에서 코트 선택 페이지 컴포넌트를 생성하고, 사용 가능한 코트 목록을 표시
+	- 코트 선택 시 예약 페이지로 이동하는 라우팅을 설정
+	
+	8) 예약 페이지
+	- url : `/bookings/create`
+	- 날짜 선택하고 시간에 따른 클래스 선택하여 예약
+	- 예약 버튼 클릭 시 Django 서버로 예약 정보를 전송하고, 예약 성공 팝업을 표시
+	- 예약 성공 시 사용자의 프로필 페이지에 예약 내역을 추가
+	
+	9) 커뮤니티 페이지
+	- url : `/notices`
+	- 공지사항, 자유게시판 선택 버튼
+	- 관리자만 이벤트 등의 글을 작성, 수정, 삭제
+	- 회원은 글을 읽기만 가능
+	
+	10) 자유게시판 페이지
+	- url : `/blog`
+	- 로그인 한 회원은 자신의 글만 작성, 수정, 삭제
+	- 게시글 작성: 제목, 내용, 이미지(미디어)입력받고 작성자, 업데이트시간 표시
+	- 게시글과 댓글에 대한 CRUD기능 구현
 
 
 ## 9. 생각
 * 간단한 기능 구현이지만 백엔드 프론트엔드를 나눠서 구조화하는 것이 아직 어려웠고 TDD등 여러가지를 생각하다보니 꼬임
-* 배포에 대한 공부가 많이 필요
+* 배포에 대한 학습이 많이 필요
+* SSL 인증서: Let's Encrypt까지 하려고 했으나 시간부족
 
 
 ## 10. 트러블슈팅
-* onedrive폴더에서 압축하다가 취소 -> 삭제됨
+* onedrive환경에서 압축하다가 취소 -> 삭제되었는데 일부는 찾음음
 * 백엔드 프론트엔드 연결
 
