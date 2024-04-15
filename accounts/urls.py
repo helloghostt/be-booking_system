@@ -1,13 +1,9 @@
-# be/accounts/urls.py
-
 from django.urls import path
+from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 
-app_name = 'accounts'
-
 urlpatterns = [
-    path('signup/', views.signup_view, name='signup'),
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    # 다른 URL 패턴이 필요하다면 여기에 추가
+    path('signup/', views.UserRegistrationView.as_view(), name='user_registration'),
+    path('login/', obtain_auth_token, name='user_login'),
+    path('profile/', views.UserProfileView.as_view(), name='user_profile'),
 ]

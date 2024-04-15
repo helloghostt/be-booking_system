@@ -1,44 +1,37 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
-# from django.urls import reverse
+from rest_framework.test import APIClient
+from rest_framework import status
+from .models import User
 
-User = get_user_model()
+class UserTests(TestCase):
+    def setUp(self):
+        self.client = APIClient()
 
-# class SignupTests(TestCase):
-#     def test_signup_url_exists(self):
-#         response = self.client.get(reverse('signup'))
-#         self.assertEqual(response.status_code, 200)
+    def test_user_registration(self):
+        data = {
+            'username': 'testuser',
+            'password': 'testpassword'
+        }
+        response = self.client.post('/accounts/signup/', data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-#     def test_signup_form(self):
-#         response = self.client.post(reverse('signup'), {
-#             'username': 'testuser',
-#             'password1': 'testpassword',
-#             'password2': 'testpassword',
-#         })
-#         self.assertEqual(response.status_code, 302)
-#         self.assertTrue(User.objects.filter(username='testuser').exists())
+    def test_user_login(self):
+        User.objects.create_user(
+            username='testuser',
+            password='testpassword'
+        )
+        data = {
+            'username': 'testuser',
+            'password': 'testpassword'
+        }
+        response = self.client.post('/accounts/login/', data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-# class LoginTests(TestCase):
-#     def setUp(self):
-#         self.user = User.objects.create_user(username='testuser', password='testpassword')
-
-#     def test_login_url_exists(self):
-#         response = self.client.get(reverse('login'))
-#         self.assertEqual(response.status_code, 200)
-
-#     def test_login_form(self):
-#         response = self.client.post(reverse('login'), {
-#             'username': 'testuser',
-#             'password': 'testpassword',
-#         })
-#         self.assertEqual(response.status_code, 302)
-        
-class UserModelTests(TestCase):
-    def test_user_creation(self):
+    def test_user_profile(self):
         user = User.objects.create_user(
             username='testuser',
-            password='testpassword',
-            level=2
+            password='testpassword'
         )
-        self.assertEqual(user.username, 'testuser')
-        self.assertEqual(user.level, 2)
+        self.client.force_authenticate(user=user)
+        response = self.client.get('/accounts/profile/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

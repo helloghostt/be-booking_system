@@ -1,12 +1,14 @@
 from rest_framework import serializers
 from .models import Booking
-from accounts.serializers import UserSerializer
-from courts.serializers import CourtSerializer
 
 class BookingSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    court = CourtSerializer(read_only=True)
+    user = serializers.StringRelatedField()
+    court = serializers.StringRelatedField()
 
     class Meta:
         model = Booking
-        fields = ('id', 'user', 'court', 'start_time', 'end_time', 'created_at')
+        fields = ['id', 'user', 'court', 'start_time', 'end_time', 'created_at']
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)

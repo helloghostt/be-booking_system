@@ -1,51 +1,29 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework import generics, permissions
 from .models import Notice
-from .forms import NoticeForm
+from .serializers import NoticeSerializer
 
-def is_staff(user):
-    return user.is_staff
+class NoticeListView(generics.ListAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer
 
-@login_required
-def notice_list(request):
-    notices = Notice.objects.all()
-    return render(request, 'notices/notice_list.html', {'notices': notices})
+class NoticeRetrieveView(generics.RetrieveAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer
 
-@login_required
-@user_passes_test(is_staff)
-def notice_create(request):
-    if request.method == 'POST':
-        form = NoticeForm(request.POST)
-        if form.is_valid():
-            notice = form.save(commit=False)
-            notice.author = request.user
-            notice.save()
-            return redirect('notice_list')
-    else:
-        form = NoticeForm()
-    return render(request, 'notices/notice_create.html', {'form': form})
+class NoticeCreateView(generics.CreateAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer
+    permission_classes = [permissions.IsAdminUser]
 
-@login_required
-def notice_detail(request, notice_id):
-    notice = get_object_or_404(Notice, id=notice_id)
-    return render(request, 'notices/notice_detail.html', {'notice': notice})
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
-@login_required
-@user_passes_test(is_staff)
-def notice_update(request, notice_id):
-    notice = get_object_or_404(Notice, id=notice_id)
-    if request.method == 'POST':
-        form = NoticeForm(request.POST, instance=notice)
-        if form.is_valid():
-            form.save()
-            return redirect('notice_detail', notice_id=notice.id)
-    else:
-        form = NoticeForm(instance=notice)
-    return render(request, 'notices/notice_update.html', {'form': form})
+class NoticeUpdateView(generics.UpdateAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer
+    permission_classes = [permissions.IsAdminUser]
 
-@login_required
-@user_passes_test(is_staff)
-def notice_delete(request, notice_id):
-    notice = get_object_or_404(Notice, id=notice_id)
-    notice.delete()
-    return redirect('notice_list')
+class NoticeDestroyView(generics.DestroyAPIView):
+    queryset = Notice.objects.all()
+    serializer_class = NoticeSerializer
+    permission_classes = [permissions.IsAdminUser]

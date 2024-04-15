@@ -4,4 +4,4 @@ from .models import Court
 class CourtSerializer(serializers.ModelSerializer):
     class Meta:
         model = Court
-        fields = ('id', 'name', 'description')
+        fields = ['id', 'name', 'description']

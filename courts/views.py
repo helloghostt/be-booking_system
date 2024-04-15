@@ -1,8 +1,11 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from rest_framework import generics
 from .models import Court
+from .serializers import CourtSerializer
 
-@login_required
-def court_list(request):
-    courts = Court.objects.all()
-    return render(request, 'courts/court_list.html', {'courts': courts})
+class CourtListCreateView(generics.ListCreateAPIView):
+    queryset = Court.objects.all()
+    serializer_class = CourtSerializer
+
+class CourtRetrieveView(generics.RetrieveAPIView):
+    queryset = Court.objects.all()
+    serializer_class = CourtSerializer
