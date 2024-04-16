@@ -63,8 +63,77 @@ section 배포
 
 ## 6. ERD 작성
 
-<img src="erd.png" alt="alt text" width="500">
+```mermaid
+erDiagram
+    USERS {
+        int id PK "primary key"
+        varchar username "not null, unique"
+        varchar password "not null"
+        varchar email "not null, unique"
+        bool is_staff "default: false"
+        datetime date_joined "default: now()"
+    }
 
+    PROFILES {
+        int id PK "primary key"
+        int user_id FK "foreign key to USERS.id"
+        varchar first_name
+        varchar last_name
+        varchar phone_number
+        varchar address
+    }
+
+    COURTS {
+        int id PK "primary key"
+        varchar name "not null"
+        varchar location
+        varchar availability
+        text description
+    }
+
+    BOOKINGS {
+        int id PK "primary key"
+        int user_id FK "foreign key to USERS.id"
+        int court_id FK "foreign key to COURTS.id"
+        date date "not null"
+        time time_slot "not null"
+        datetime created_at "default: now()"
+    }
+
+    NOTICES {
+        int id PK "primary key"
+        varchar title "not null"
+        text content "not null"
+        datetime created_at "default: now()"
+        datetime updated_at
+        int author_id FK "foreign key to PROFILES.id"
+    }
+
+    BLOGS {
+        int id PK "primary key"
+        varchar title "not null"
+        text content "not null"
+        datetime created_at "default: now()"
+        datetime updated_at
+        int author_id FK "foreign key to PROFILES.id"
+    }
+
+    COMMENTS {
+        int id PK "primary key"
+        int blog_id FK "foreign key to BLOGS.id"
+        int author_id FK "foreign key to PROFILES.id"
+        text content "not null"
+        datetime created_at "default: now()"
+    }
+
+    USERS ||--o{ PROFILES : "user_id"
+    PROFILES ||--o{ BOOKINGS : "user_id"
+    COURTS ||--o{ BOOKINGS : "court_id"
+    PROFILES ||--o{ NOTICES : "author_id"
+    PROFILES ||--o{ BLOGS : "author_id"
+    BLOGS ||--o{ COMMENTS : "blog_id"
+    PROFILES ||--o{ COMMENTS : "author_id"
+```
 
 
 ## 7. 폴더구조
