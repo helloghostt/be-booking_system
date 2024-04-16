@@ -63,8 +63,7 @@ section 배포
 
 ## 6. ERD 작성
 
-<img src="erd.png" alt="alt text" width="500">
-```
+```mermaid
 erDiagram
     USERS {
         int id PK "primary key"
@@ -127,15 +126,16 @@ erDiagram
         datetime created_at "default: now()"
     }
 
-    USERS ||--o{ PROFILES : "user_id"    // User와 Profile 1:1 관계
-    PROFILES ||--o{ BOOKINGS : "user_id" // Profile과 Booking 1:N 관계
-    COURTS ||--o{ BOOKINGS : "court_id" // Court와 Booking 1:N 관계
-    PROFILES ||--o{ NOTICES : "author_id" // Profile과 Notice 1:N 관계
-    PROFILES ||--o{ BLOGS : "author_id" // Profile과 Blog 1:N 관계
-    BLOGS ||--o{ COMMENTS : "blog_id" // Blog와 Comment 1:N 관계
-    PROFILES ||--o{ COMMENTS : "author_id" // Profile과 Comment 1:N 관계
-
+    USERS ||--o{ PROFILES : "user_id"
+    PROFILES ||--o{ BOOKINGS : "user_id"
+    COURTS ||--o{ BOOKINGS : "court_id"
+    PROFILES ||--o{ NOTICES : "author_id"
+    PROFILES ||--o{ BLOGS : "author_id"
+    BLOGS ||--o{ COMMENTS : "blog_id"
+    PROFILES ||--o{ COMMENTS : "author_id"
 ```
+
+
 ## 7. 폴더구조
 	   backend/
 	    ├── tennisproject/
