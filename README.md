@@ -64,9 +64,78 @@ section 배포
 ## 6. ERD 작성
 
 <img src="erd.png" alt="alt text" width="500">
+```
+erDiagram
+    USERS {
+        int id PK "primary key"
+        varchar username "not null, unique"
+        varchar password "not null"
+        varchar email "not null, unique"
+        bool is_staff "default: false"
+        datetime date_joined "default: now()"
+    }
 
+    PROFILES {
+        int id PK "primary key"
+        int user_id FK "foreign key to USERS.id"
+        varchar first_name
+        varchar last_name
+        varchar phone_number
+        varchar address
+    }
 
+    COURTS {
+        int id PK "primary key"
+        varchar name "not null"
+        varchar location
+        varchar availability
+        text description
+    }
 
+    BOOKINGS {
+        int id PK "primary key"
+        int user_id FK "foreign key to USERS.id"
+        int court_id FK "foreign key to COURTS.id"
+        date date "not null"
+        time time_slot "not null"
+        datetime created_at "default: now()"
+    }
+
+    NOTICES {
+        int id PK "primary key"
+        varchar title "not null"
+        text content "not null"
+        datetime created_at "default: now()"
+        datetime updated_at
+        int author_id FK "foreign key to PROFILES.id"
+    }
+
+    BLOGS {
+        int id PK "primary key"
+        varchar title "not null"
+        text content "not null"
+        datetime created_at "default: now()"
+        datetime updated_at
+        int author_id FK "foreign key to PROFILES.id"
+    }
+
+    COMMENTS {
+        int id PK "primary key"
+        int blog_id FK "foreign key to BLOGS.id"
+        int author_id FK "foreign key to PROFILES.id"
+        text content "not null"
+        datetime created_at "default: now()"
+    }
+
+    USERS ||--o{ PROFILES : "user_id"    // User와 Profile 1:1 관계
+    PROFILES ||--o{ BOOKINGS : "user_id" // Profile과 Booking 1:N 관계
+    COURTS ||--o{ BOOKINGS : "court_id" // Court와 Booking 1:N 관계
+    PROFILES ||--o{ NOTICES : "author_id" // Profile과 Notice 1:N 관계
+    PROFILES ||--o{ BLOGS : "author_id" // Profile과 Blog 1:N 관계
+    BLOGS ||--o{ COMMENTS : "blog_id" // Blog와 Comment 1:N 관계
+    PROFILES ||--o{ COMMENTS : "author_id" // Profile과 Comment 1:N 관계
+
+```
 ## 7. 폴더구조
 	   backend/
 	    ├── tennisproject/
